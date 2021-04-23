@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-6"
+				style="background-color: #dfe2e3; padding: 50px;">
+
+				<!-- STATUS -->
+				<h1 class="text-center">
+					<i class="fa fa-bug"></i> Bug Tracker Login
+				</h1>
+				<div th:text="${status}" class="text-danger"></div>
+
+				<!-- USER LOGIN FORM  -->
+				<form method="POST" th:action="@{'/userlogin'}"
+					th:object="${loginDetail}">
+
+					<!-- Email input -->
+					<div class="form-group">
+						<label for="email">Email address</label> <input type="email"
+							class="form-control" name="email" id="email"
+							placeholder="Enter email"
+							th:classappend="${#fields.hasErrors('email')}?'is-invalid':''"
+							th:value="${loginDetail.email}">
+						<div th:each="e : ${#fields.errors('email')}" th:text="${e}"
+							class="invalid-feedback"></div>
+					</div>
+
+					<!-- Password input -->
+					<div class="form-group">
+						<label for="password">Password</label> <input type="password"
+							class="form-control" name="password" id="password"
+							th:classappend="${#fields.hasErrors('password')}?'is-invalid':''"
+							placeholder="Password">
+						<div th:each="e : ${#fields.errors('password')}" th:text="${e}"
+							class="invalid-feedback"></div>
+					</div>
+
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
+
+				<!-- GOTO REGISTER PAGE -->
+				<a th:href="@{/register}">register here</a>
+			</div>
+			<div class="col-md-3"></div>
+		</div>
+	</div>
+
+</body>
+</html>

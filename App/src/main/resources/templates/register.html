@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+</head>
+<body>
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6"
+			style="background-color: #dfe2e3; padding: 50px;">
+
+			<h1 class="text-center">
+				<i class="fa fa-bug"></i>Bug Tracker Registration
+			</h1>
+
+			<div th:text="${status}" class="text-danger"></div>
+
+			<!-- USER REGISTRATION FORM -->
+			<form novalidate="novalidate" method="post"
+				th:action="@{'/registeruser'}" th:object="${user}">
+
+				<!-- Email input -->
+				<div class="form-group">
+					<label for="email">Email address</label> <input type="email"
+						th:classappend="${#fields.hasErrors('email')}?'is-invalid':''"
+						class="form-control" name="email" id="email"
+						th:value="${user.email}" placeholder="Enter email">
+					<div th:each="e : ${#fields.errors('email')}" th:text="${e}"
+						id="validationServer03Feedback" class="invalid-feedback"></div>
+				</div>
+
+				<!-- Firstname input -->
+				<div class="form-group">
+					<label for="firstname">First Name</label> <input type="text"
+						th:classappend="${#fields.hasErrors('firstname')}?'is-invalid':''"
+						class="form-control" name="firstname" id="firstname"
+						th:value="${user.firstname}" placeholder="Enter firstname">
+					<div th:each="e : ${#fields.errors('firstname')}" th:text="${e}"
+						id="validationServer03Feedback" class="invalid-feedback"></div>
+				</div>
+
+				<!-- Lastname input -->
+				<div class="form-group">
+					<label for="lastname">Last Name</label> <input type="text"
+						th:classappend="${#fields.hasErrors('lastname')}?'is-invalid':''"
+						class="form-control" name="lastname" id="lastname"
+						th:value="${user.lastname}" placeholder="Enter lastname">
+					<div th:each="e : ${#fields.errors('lastname')}" th:text="${e}"
+						class="invalid-feedback"></div>
+				</div>
+
+				<!-- Phone Input -->
+				<div class="form-group">
+					<label for="phone">Phone no</label> <input type="text"
+						th:classappend="${#fields.hasErrors('phone')}?'is-invalid':''"
+						class="form-control" name="phone" id="phone"
+						th:value="${user.phone}" placeholder="Enter phone no">
+					<div th:each="e : ${#fields.errors('phone')}" th:text="${e}"
+						class="invalid-feedback"></div>
+				</div>
+
+				<!-- Role Input -->
+				<div class="form-select">
+					<label for="role">Select Role</label> <select name="role" id="role"
+						th:classappend="${#fields.hasErrors('role')}?'is-invalid':''"
+						th:value="${user.role}">
+						<option value="">Chose One</option>
+						<option value="admin">Admin</option>
+						<option value="developer">Developer</option>
+						<option value="project_manager">Project Manager</option>
+						<option value="submitter">Submitter</option>
+					</select>
+					<div th:each="e : ${#fields.errors('role')}" th:text="${e}"
+						class="invalid-feedback"></div>
+				</div>
+
+				<!-- Password Input -->
+				<div class="form-group">
+					<label for="password">Password</label> <input type="password"
+						th:classappend="${#fields.hasErrors('password')}?'is-invalid':''"
+						class="form-control" name="password" id="password"
+						placeholder="Enter password">
+					<div th:each="e : ${#fields.errors('password')}" th:text="${e}"
+						class="invalid-feedback"></div>
+				</div>
+
+				<!-- Confirm Password Input -->
+				<div class="form-group">
+					<label for="confirmPassword">Confirm Password</label> <input
+						type="password" class="form-control" name="confirmPassword"
+						th:classappend="${#fields.hasErrors('confirmPassword')}?'is-invalid':''"
+						id="confirmPassword" placeholder="Enter password again">
+				</div>
+				<button type="submit" class="btn btn-primary">Register</button>
+			</form>
+			<a th:href=@{/login}>Already a user? Log in.</a>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+</body>
+</html>
